@@ -10,14 +10,16 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.Test;
 
 //import PathalogyLabMgmt.pageobject.LandingPage;
 
 public class addpatient {
 
-	public static void main(String[] args) throws InterruptedException {
+	@Test
+	public void AddPatientProcess() throws InterruptedException {
 		// TODO Auto-generated method stub
-		System.setProperty("webdriver.chrome.driver", "C:\\Program Files\\Grid\\chromedriver-win64\\chromedriver.exe");
+		System.setProperty("webdriver.chrome.driver", "..\\PrasadProject\\target\\chromedriver.exe");
 		ChromeOptions inco = new ChromeOptions();
 		inco.addArguments("--incognito");
 
@@ -112,39 +114,22 @@ public class addpatient {
 //			option1.click();
 //		}
 
-		
 		WebElement en = driver.findElement(By.xpath("//div[contains(@aria-label,'Eqipment Name')]"));
-      	en.click();
+		en.click();
 		docname.sendKeys("test");
 		docname.sendKeys(Keys.ENTER);
 		JavascriptExecutor js1 = (JavascriptExecutor) driver;
-	    js1.executeScript("window.scrollBy(0, 1500)");
+		js1.executeScript("window.scrollBy(0, 1500)");
 		Thread.sleep(2000);
 		WebElement plusIcon = driver.findElement(By.xpath("//span[@class='material-icons MuiIcon-root']"));
 		js1.executeScript("arguments[0].click();", plusIcon);
-		
-	// click on the check
+
+		// click on the check
 		WebElement check = driver.findElement(By.xpath("//span[contains(text(),'check')]"));
 		check.click();
-		
-		//click on the add patient button
+
+		// click on the add patient button
 		driver.findElement(By.xpath("//span[contains(.,'Add Patient')]")).click();
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 
 //
 //		//driver.findElement(By.xpath("//input[contains(@aria-controls,'patient-tests-labs-popup')]")).click();
