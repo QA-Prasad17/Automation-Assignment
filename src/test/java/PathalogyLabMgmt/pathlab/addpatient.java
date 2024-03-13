@@ -1,17 +1,14 @@
 package PathalogyLabMgmt.pathlab;
 
 import java.time.Duration;
-import java.util.List;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 //import PathalogyLabMgmt.pageobject.LandingPage;
@@ -35,11 +32,6 @@ public class addpatient {
 		System.out.println(tl);
 		driver.findElement(By.xpath("//span[normalize-space()='Login']")).click();
 		Thread.sleep(3000);
-
-		// select option from left menubar
-		// driver.findElement(By.xpath("//span[normalize-space()='Tests']")).click();
-		// driver.findElement(By.xpath("//*[@id=\"root\"]/div/nav/div[2]/div/div/div/div[2]/ul/a[4]/div/div[2]/span"))
-		// .click();
 		driver.findElement(By.xpath("//span[contains(text(),'Patients')]")).click();
 
 		driver.findElement(By.xpath("//body/div[@id='root']/div[1]/main[1]/div[2]/div[1]/a[1]/button[1]/span[1]"))
@@ -81,22 +73,89 @@ public class addpatient {
 		WebElement doccom = driver.findElement(By.xpath("//div[@id='mui-component-select-doctor_commission']"));
 		doccom.click();
 		driver.findElement(By.xpath("//li[contains(@data-value,'10')]")).click();
-		//driver.findElement(By.xpath("//input[contains(@id,'mui-57549')]")).click();
-		driver.findElement(By.xpath("//input[@name='doctor_name']")).click();
-		driver.findElement(By.xpath("//li[contains(.,'Atharva Hiwase')]")).click();
-		driver.findElement(By.xpath("//input[@id='patient-test']")).click();
-		driver.findElement(By.xpath("//div[@class='MuiBox-root jss269']"));
 
-		driver.findElement(By.xpath("//input[contains(@aria-controls,'patient-tests-labs-popup')]")).click();
-		driver.findElement(By.xpath("//div[@class='MuiBox-root jss336']")).click();
-		driver.findElement(By.xpath("//span[@class='material-icons MuiIcon-root']"));
+		// driver.findElement(By.xpath("//input[contains(@id,'mui-57549')]")).click();
+//		
+//		Open the doctors name dropdown
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(10));
+		WebElement docname = driver.findElement(By.xpath("//input[@name='doctor_name']"));
+		docname.sendKeys("Atharva Hiwase");
+		docname.sendKeys(Keys.ENTER);
 
+//		WebElement patientTest = driver.findElement(By.xpath("//input[contains(@id,'patient-test')]"));
+//		patientTest.click();
+		Thread.sleep(3000);
+		// Code to interact with checkbox options inside the dropdown
+
+		// List<WebElement> options =
+		// dropdown.findElements(By.xpath("//li[contains(@data-focus,'true')]"));
+
+		// Specify the text of the option you want to select
+//        String valueToSelect = "AFP (ALPHA FETO PROTEINS) - 350₹";
+//        for (WebElement option : options) {
+//            if (option.getText().equals(valueToSelect)) {
+//                option.click(); // Click on the option to select it
+//                break; // Exit the loop once the desired option is selected
+//            }
+//        }
+
+//		try {
+//			WebElement patientTest = driver.findElement(By.xpath("//input[contains(@id,'patient-test')]"));
+//			patientTest.click();
+//			WebElement option = driver.findElement(By.xpath("//div[@class='MuiBox-root jss1210']"));
+//			option.click();
+//		} catch (StaleElementReferenceException e) {
+//			// Retry logic
+//			WebElement dropdown1 = driver.findElement(By.xpath("//input[contains(@id,'patient-test')]"));
+//			dropdown1.click();
+//			WebElement option1 = driver.findElement(By.xpath("//div[@class='MuiBox-root jss1210']"));
+//			option1.click();
+//		}
+
+		
+		WebElement en = driver.findElement(By.xpath("//div[contains(@aria-label,'Eqipment Name')]"));
+      	en.click();
+		docname.sendKeys("test");
+		docname.sendKeys(Keys.ENTER);
+		JavascriptExecutor js1 = (JavascriptExecutor) driver;
+	    js1.executeScript("window.scrollBy(0, 1500)");
 		Thread.sleep(2000);
-		driver.findElement(By.xpath("//div[@aria-label='Eqipment Name']")).click();
-		driver.findElement(By.xpath("//li[contains(.,'test')]"));
-		driver.findElement(By.xpath("//input[contains(@aria-label,'Required')]")).sendKeys("2");
-		driver.findElement(By.xpath("//button[contains(.,'check')]")).click();
+		WebElement plusIcon = driver.findElement(By.xpath("//span[@class='material-icons MuiIcon-root']"));
+		js1.executeScript("arguments[0].click();", plusIcon);
+		
+	// click on the check
+		WebElement check = driver.findElement(By.xpath("//span[contains(text(),'check')]"));
+		check.click();
+		
+		//click on the add patient button
 		driver.findElement(By.xpath("//span[contains(.,'Add Patient')]")).click();
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+
+//
+//		//driver.findElement(By.xpath("//input[contains(@aria-controls,'patient-tests-labs-popup')]")).click();
+////		driver.findElement(By.xpath("//div[@class='MuiBox-root jss336']")).click();
+////		driver.findElement(By.xpath("//span[@class='material-icons MuiIcon-root']"));
+//
+//		
+////		WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(5));
+////		WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[contains(@aria-label,'Eqipment Name')]")));
+////		element.click();
+////	;
 
 	}
 
