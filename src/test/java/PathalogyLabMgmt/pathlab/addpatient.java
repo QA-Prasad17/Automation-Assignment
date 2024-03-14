@@ -4,11 +4,11 @@ import java.time.Duration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 
@@ -67,81 +67,63 @@ public class addpatient {
 				.click();
 		Thread.sleep(2000);
 
-		// Test cost calculator
+		// Find the input field for the dropdown
+		WebElement patientTest = driver.findElement(By.id("patient-test"));
+		patientTest.click(); // Click on the input field to activate it
 
+		// Wait for the dropdown options to appear (if applicable)
+		// Replace the following line with appropriate waiting logic if necessary
+		Thread.sleep(2000); // Example: Wait for 2 seconds
+
+		// Find and click on the checkbox element
+		WebElement checkbox = driver
+				.findElement(By.xpath("//li[contains(.,'check_box_outline_blankAFP (ALPHA FETO PROTEINS)350₹')]"));
+		checkbox.click(); // Click on the checkbox to select it
+
+		// Find the input field for the dropdown
+
+		// span[contains(.,'HEALTHCARE PATHOLOGY (Sion) - AFP (ALPHA FETO PROTEINS)')]
 		WebElement dis = driver.findElement(By.xpath("//div[normalize-space()='None']"));
 		dis.click();
 		driver.findElement(By.xpath("//li[@data-value='5']")).click();
-		WebElement doccom = driver.findElement(By.xpath("//div[@id='mui-component-select-doctor_commission']"));
-		doccom.click();
+		// span[contains(text(),'HEALTHCARE PATHOLOGY (Sion) - AFP (ALPHA FETO PROT')]
+
+		// Open the doctors name dropdown
+		WebDriverWait wait1 = new WebDriverWait(driver, Duration.ofMillis(10));
+		WebElement doctorname = driver.findElement(By.xpath("//input[@name='doctor_name']"));
+		doctorname.sendKeys("Atharva Hiwase");
+		doctorname.sendKeys(Keys.ENTER);
+
+		WebElement doctorcommission = driver
+				.findElement(By.xpath("//div[@id='mui-component-select-doctor_commission']"));
+		doctorcommission.click();
 		driver.findElement(By.xpath("//li[contains(@data-value,'10')]")).click();
 
-		// driver.findElement(By.xpath("//input[contains(@id,'mui-57549')]")).click();
-//		
-//		Open the doctors name dropdown
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(10));
-		WebElement docname = driver.findElement(By.xpath("//input[@name='doctor_name']"));
-		docname.sendKeys("Atharva Hiwase");
-		docname.sendKeys(Keys.ENTER);
+		WebElement labRec = driver.findElement(By.id("patient-tests-labs"));
+		labRec.click(); // Click on the input field to activate it
+		Thread.sleep(2000);
+		labRec.sendKeys("HEALTHCARE PATHOLOGY (Sion) - AFP (ALPHA FETO PROTEIN");
+		Actions actions1 = new Actions(driver);
+		actions1.sendKeys(Keys.ARROW_DOWN).perform();
+		// Optionally, you can press ENTER to select the suggestion
+		actions1.sendKeys(Keys.ENTER).perform();
 
-//		WebElement patientTest = driver.findElement(By.xpath("//input[contains(@id,'patient-test')]"));
-//		patientTest.click();
-		Thread.sleep(3000);
-		// Code to interact with checkbox options inside the dropdown
-
-		// List<WebElement> options =
-		// dropdown.findElements(By.xpath("//li[contains(@data-focus,'true')]"));
-
-		// Specify the text of the option you want to select
-//        String valueToSelect = "AFP (ALPHA FETO PROTEINS) - 350₹";
-//        for (WebElement option : options) {
-//            if (option.getText().equals(valueToSelect)) {
-//                option.click(); // Click on the option to select it
-//                break; // Exit the loop once the desired option is selected
-//            }
-//        }
-
-//		try {
-//			WebElement patientTest = driver.findElement(By.xpath("//input[contains(@id,'patient-test')]"));
-//			patientTest.click();
-//			WebElement option = driver.findElement(By.xpath("//div[@class='MuiBox-root jss1210']"));
-//			option.click();
-//		} catch (StaleElementReferenceException e) {
-//			// Retry logic
-//			WebElement dropdown1 = driver.findElement(By.xpath("//input[contains(@id,'patient-test')]"));
-//			dropdown1.click();
-//			WebElement option1 = driver.findElement(By.xpath("//div[@class='MuiBox-root jss1210']"));
-//			option1.click();
-//		}
-
-		WebElement en = driver.findElement(By.xpath("//div[contains(@aria-label,'Eqipment Name')]"));
-		en.click();
-		docname.sendKeys("test");
-		docname.sendKeys(Keys.ENTER);
 		JavascriptExecutor js1 = (JavascriptExecutor) driver;
 		js1.executeScript("window.scrollBy(0, 1500)");
 		Thread.sleep(2000);
 		WebElement plusIcon = driver.findElement(By.xpath("//span[@class='material-icons MuiIcon-root']"));
 		js1.executeScript("arguments[0].click();", plusIcon);
 
-		// click on the check
+		WebElement dropdownButton = driver.findElement(By.xpath("//div[@aria-label='Eqipment Name']"));
+		Actions actions = new Actions(driver);
+		actions.doubleClick(dropdownButton).perform();
+		WebElement Enoption = driver.findElement(By.xpath("//li[contains(text(),'injection')]"));
+
+		// Click on the option to select it
+		Enoption.click();
 		WebElement check = driver.findElement(By.xpath("//span[contains(text(),'check')]"));
 		check.click();
-
-		// click on the add patient button
 		driver.findElement(By.xpath("//span[contains(.,'Add Patient')]")).click();
-
-//
-//		//driver.findElement(By.xpath("//input[contains(@aria-controls,'patient-tests-labs-popup')]")).click();
-////		driver.findElement(By.xpath("//div[@class='MuiBox-root jss336']")).click();
-////		driver.findElement(By.xpath("//span[@class='material-icons MuiIcon-root']"));
-//
-//		
-////		WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(5));
-////		WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[contains(@aria-label,'Eqipment Name')]")));
-////		element.click();
-////	;
-
 	}
 
 }
